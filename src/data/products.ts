@@ -10,8 +10,23 @@ export interface Products {
   avgRating: number
 }
 
+export const getProduct = (id: number): Products | undefined => {
+  return products.find((product) => product.id === id)
+}
+
+export const getProducts = (ids: number[]): Products[] => {
+  return products.filter((product) => ids.includes(product.id))
+}
+
+export const searchProducts = (query: string): Products[] => {
+  return products.filter((product) =>
+    product.name.toLowerCase().includes(query.toLowerCase())
+  )
+}
+
 export const products = [
   {
+    "id": 1,
     "productImage": "https://example.com/images/laptop.jpg",
     "name": "Laptop Pro X",
     "price": 1200.99,
@@ -21,6 +36,7 @@ export const products = [
     "avgRating": 4.5
   },
   {
+    "id": 2,
     "productImage": "https://example.com/images/smartphone.jpg",
     "name": "Smartphone Z",
     "price": 999.99,
@@ -30,6 +46,7 @@ export const products = [
     "avgRating": 4.7
   },
   {
+    "id": 3,
     "productImage": "https://example.com/images/sneakers.jpg",
     "name": "AirRun Sneakers",
     "price": 129.99,
@@ -39,6 +56,7 @@ export const products = [
     "avgRating": 4.2
   },
   {
+    "id": 4,
     "productImage": "https://example.com/images/coffee-maker.jpg",
     "name": "Coffee Maker 5000",
     "price": 89.99,
@@ -48,6 +66,7 @@ export const products = [
     "avgRating": 4.0
   },
   {
+    "id": 5,
     "productImage": "https://example.com/images/guitar.jpg",
     "name": "Acoustic Guitar",
     "price": 299.99,
@@ -57,6 +76,7 @@ export const products = [
     "avgRating": 4.6
   },
   {
+    "id": 6,
     "productImage": "https://example.com/images/headphones.jpg",
     "name": "Noise Cancelling Headphones",
     "price": 199.99,
@@ -66,6 +86,7 @@ export const products = [
     "avgRating": 4.8
   },
   {
+    "id": 7,
     "productImage": "https://example.com/images/tablet.jpg",
     "name": "Tablet Ultra",
     "price": 499.99,
@@ -75,6 +96,7 @@ export const products = [
     "avgRating": 4.4
   },
   {
+    "id": 8,
     "productImage": "https://example.com/images/washing-machine.jpg",
     "name": "Washing Machine X",
     "price": 599.99,
@@ -84,6 +106,7 @@ export const products = [
     "avgRating": 4.3
   },
   {
+    "id": 9,
     "productImage": "https://example.com/images/monitor.jpg",
     "name": "Curved Monitor 32\"",
     "price": 349.99,
@@ -93,6 +116,7 @@ export const products = [
     "avgRating": 4.6
   },
   {
+    "id": 10,
     "productImage": "https://example.com/images/blender.jpg",
     "name": "Blender Max",
     "price": 79.99,
@@ -102,6 +126,7 @@ export const products = [
     "avgRating": 4.2
   },
   {
+    "id": 11,
     "productImage": "https://example.com/images/smartwatch.jpg",
     "name": "Smartwatch Pro",
     "price": 199.99,
@@ -111,6 +136,7 @@ export const products = [
     "avgRating": 4.5
   },
   {
+    "id": 12,
     "productImage": "https://example.com/images/tv.jpg",
     "name": "Smart TV 55\"",
     "price": 799.99,
@@ -120,6 +146,7 @@ export const products = [
     "avgRating": 4.7
   },
   {
+    "id": 13,
     "productImage": "https://example.com/images/soundbar.jpg",
     "name": "Soundbar X",
     "price": 149.99,
@@ -129,6 +156,7 @@ export const products = [
     "avgRating": 4.3
   },
   {
+    "id": 14,
     "productImage": "https://example.com/images/fridge.jpg",
     "name": "Refrigerator 300L",
     "price": 899.99,
@@ -138,6 +166,7 @@ export const products = [
     "avgRating": 4.5
   },
   {
+    "id": 15,
     "productImage": "https://example.com/images/oven.jpg",
     "name": "Electric Oven Pro",
     "price": 299.99,
@@ -147,6 +176,7 @@ export const products = [
     "avgRating": 4.1
   },
   {
+    "id": 16,
     "productImage": "https://example.com/images/microwave.jpg",
     "name": "Microwave Oven",
     "price": 149.99,
@@ -156,6 +186,7 @@ export const products = [
     "avgRating": 4.2
   },
   {
+    "id": 17,
     "productImage": "https://example.com/images/drone.jpg",
     "name": "Drone X Pro",
     "price": 999.99,
@@ -165,6 +196,7 @@ export const products = [
     "avgRating": 4.6
   },
   {
+    "id": 18,
     "productImage": "https://example.com/images/kettle.jpg",
     "name": "Electric Kettle",
     "price": 49.99,
@@ -174,6 +206,7 @@ export const products = [
     "avgRating": 4.3
   },
   {
+    "id": 19,
     "productImage": "https://example.com/images/iron.jpg",
     "name": "Steam Iron",
     "price": 59.99,
@@ -183,6 +216,7 @@ export const products = [
     "avgRating": 4.4
   },
   {
+    "id": 20,
     "productImage": "https://example.com/images/vacuum.jpg",
     "name": "Vacuum Cleaner Pro",
     "price": 199.99,
@@ -192,6 +226,7 @@ export const products = [
     "avgRating": 4.3
   },
   {
+    "id": 21,
     "productImage": "https://example.com/images/shoes.jpg",
     "name": "Running Shoes",
     "price": 89.99,
@@ -201,6 +236,7 @@ export const products = [
     "avgRating": 4.2
   },
   {
+    "id": 22,
     "productImage": "https://example.com/images/jacket.jpg",
     "name": "Winter Jacket",
     "price": 129.99,
@@ -210,57 +246,34 @@ export const products = [
     "avgRating": 4.3
   },
   {
+    "id": 23,
     "productImage": "https://example.com/images/tshirt.jpg",
     "name": "Graphic T-Shirt",
     "price": 29.99,
     "category": "Clothing",
-    "description": "Express your style with this comfortable and trendy graphic tee.",
-    "numberOfReviews": 212,
+    "description": "Express your style with this trendy graphic t-shirt.",
+    "numberOfReviews": 98,
     "avgRating": 4.1
   },
   {
-    "productImage": "https://example.com/images/trousers.jpg",
-    "name": "Chino Trousers",
+    "id": 24,
+    "productImage": "https://example.com/images/pants.jpg",
+    "name": "Casual Pants",
     "price": 49.99,
     "category": "Clothing",
-    "description": "Casual and comfortable chinos, perfect for any occasion.",
+    "description": "Comfortable and versatile casual pants for everyday wear.",
     "numberOfReviews": 156,
-    "avgRating": 4.0
-  },
-  {
-    "productImage": "https://example.com/images/socks.jpg",
-    "name": "Cotton Socks (5 Pack)",
-    "price": 19.99,
-    "category": "Clothing",
-    "description": "Soft and breathable cotton socks for everyday use.",
-    "numberOfReviews": 98,
-    "avgRating": 4.5
-  },
-  {
-    "productImage": "https://example.com/images/blender.jpg",
-    "name": "Blender Max",
-    "price": 79.99,
-    "category": "Home Appliances",
-    "description": "Blend smoothies, soups, and more with this high-speed blender.",
-    "numberOfReviews": 112,
     "avgRating": 4.2
   },
   {
-    "productImage": "https://example.com/images/backpack.jpg",
-    "name": "Waterproof Backpack",
-    "price": 79.99,
+    "id": 25,
+    "productImage": "https://example.com/images/watch.jpg",
+    "name": "Analog Watch",
+    "price": 149.99,
     "category": "Accessories",
-    "description": "Durable and waterproof backpack, perfect for hiking or travel.",
-    "numberOfReviews": 154,
-    "avgRating": 4.3
-  },
-  {
-    "productImage": "https://example.com/images/mattress.jpg",
-    "name": "Memory Foam Mattress",
-    "price": 799.99,
-    "category": "Furniture",
-    "description": "Sleep comfortably with this high-quality memory foam mattress.",
-    "numberOfReviews": 187,
-    "avgRating": 4.6
+    "description": "A stylish analog watch with a classic design.",
+    "numberOfReviews": 233,
+    "avgRating": 4.4
   }
 ]
+
