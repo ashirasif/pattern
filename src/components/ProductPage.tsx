@@ -13,7 +13,7 @@ import { useToast } from '@/hooks/use-toast';
 export default function ProductPage() {
   const { productId } = useParams();
   const [product, setProduct] = useState<Products | undefined>()
-  const [cartRevalidate, setCartRevalidate] = useAtom(revalidateCartAtom)
+  const [, setCartRevalidate] = useAtom(revalidateCartAtom)
 
   useEffect(() => {
     if (!productId) return
@@ -42,7 +42,7 @@ export default function ProductPage() {
         description: 'Product has been added to cart',
       })
       setCartRevalidate(true)
-    } catch (error) {
+    } catch  {
       toast({
         title: 'Error',
         description: 'Failed to add product to cart',

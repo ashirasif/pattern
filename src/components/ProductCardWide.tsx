@@ -7,16 +7,14 @@ import { useToast } from '@/hooks/use-toast'
 
 export default function ProductCardWide(props: {product: Products}) {
   const {product} = props
-  const [_, setRevalidateCart] = useAtom(revalidateCartAtom)
+  const [, setRevalidateCart] = useAtom(revalidateCartAtom)
   const {toast} = useToast()
 
   const handleRemoveFromCart = () => {
     const cart = localStorage.getItem('cart')
     if (cart) {
       const ids = JSON.parse(cart)
-      console.log(ids)
       const newIds = ids.filter((id: string) => id !== product.id.toString())
-      console.log(newIds)
       localStorage.setItem('cart', JSON.stringify(newIds))
     }
     setRevalidateCart(true)

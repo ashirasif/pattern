@@ -1,19 +1,25 @@
-import { products } from '@/data/products';
+import { Products } from '@/data/products';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import ProductCard from './components/product-card';
 import Navbar from './components/NavBar';
 import ProductPage from './components/ProductPage';
 import { Toaster } from './components/ui/toaster';
 import Cart from './components/Cart';
+import ProductFilter from './components/ProductFilters';
+import { useState } from 'react';
 
 
 function Home() {
 
+  const [filteredProducts, setFilteredProducts] = useState<Products[] | undefined>();
+
+
   return (
-    <div>
+    <div className='max-w-screen-xl mx-auto'>
+      <ProductFilter onFilter={setFilteredProducts} />
       <div className='grid grid-cols-1 md:grid-cols-[repeat(2,_minmax(min-content,_300px))] lg:grid-cols-[repeat(3,_minmax(min-content,_300px))] xl:grid-cols-[repeat(4,_minmax(min-content,_300px))]  justify-center place-items-center gap-2 px-4'>
         {
-          products.map((product) => (
+          filteredProducts && filteredProducts.map((product) => (
             <ProductCard key={product.name} product={product} />
           ))
         }       

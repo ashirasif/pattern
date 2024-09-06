@@ -19,7 +19,7 @@ export default function Cart() {
     if (revalidateCart) {
       setRevalidateCart(false)
     }
-  }, [revalidateCart])
+  }, [revalidateCart, setRevalidateCart])
 
   useEffect(() => {
     Ids && setCart(getProducts(Ids.map((id: string) => parseInt(id))))

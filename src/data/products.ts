@@ -24,6 +24,52 @@ export const searchProducts = (query: string): Products[] => {
   )
 }
 
+export const getProductsFiltered = ({
+  category,
+  minPrice,
+  maxPrice,
+  Ascending,
+  query
+}: {
+  category?: string
+  minPrice?: number
+  maxPrice?: number
+  Ascending?: boolean
+  query?: string
+}): Products[] => {
+  if (!category && !minPrice && !maxPrice && !query) {
+    return products
+  }
+  return products
+    .filter((product) => {
+      if (category && product.category !== category) {
+        return false
+      }
+      if (minPrice && product.price < minPrice) {
+        return false
+      }
+      if (maxPrice && product.price > maxPrice) {
+        return false
+      }
+      if (query && !product.name.toLowerCase().includes(query.toLowerCase())) {
+        return false
+      }
+      return true
+    })
+    .sort((a, b) => {
+      if (Ascending) {
+        return a.price - b.price
+      } else {
+        return b.price - a.price
+      }
+    })
+}
+
+export const getAllCategories = (): string[] => {
+  return Array.from(new Set(products.map((product) => product.category))
+  )
+}
+
 export const products = [
   {
     "id": 1,
