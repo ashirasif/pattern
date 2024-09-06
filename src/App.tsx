@@ -7,7 +7,7 @@ function Home() {
   return (
     <div>
       <h1 className=''>Home</h1>
-      <div className='flex flex-row gap-6'>
+      <div className='grid grid-cols-1 md:grid-cols-[repeat(2,_minmax(min-content,_300px))] lg:grid-cols-[repeat(3,_minmax(min-content,_300px))] xl:grid-cols-[repeat(4,_minmax(min-content,_300px))]  justify-center place-items-center gap-2 px-4'>
         {products.map((product, index) => (
           <ProductCard key={index} product={{id: index, ...product}} />
         ))}
