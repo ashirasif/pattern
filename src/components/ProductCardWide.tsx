@@ -34,7 +34,7 @@ export default function ProductCardWide(props: {product: Products}) {
       </div>
       <div className='self-center flex gap-4 items-center'>
         <p className='text-lg font-semibold text-primary transition-all duration-500'>${product.price}</p>
-        <div className='group-hover:block hidden'>
+        <div className='lg:group-hover:block lg:hidden'>
           <Button onClick={handleRemoveFromCart} size="icon" variant="destructive">
             <TrashIcon className='w-6 h-6' />
           </Button>

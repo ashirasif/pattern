@@ -1,6 +1,7 @@
 import { Products } from '@/data/products'
 import { Card, CardContent } from './ui/card'
 import { Link } from 'react-router-dom'
+import Rating from './Rating'
 
 
 
@@ -20,7 +21,10 @@ export default function ProductCard ({product} : {product: Products}) {
               </div>
             </div>
             <div className='flex justify-between items-center'>
-              <p className='text-base font-semibold'>{product.avgRating}</p>
+              <div className='flex gap-1 items-center'>
+                <Rating rating={product.avgRating} />
+                <span className='text-base font-semibold'>{product.avgRating}</span>
+              </div>
               <p className='text-base font-semibold text-primary'>${product.price}</p>
             </div>
           </div>

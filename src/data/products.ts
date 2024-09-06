@@ -28,17 +28,24 @@ export const getProductsFiltered = ({
   category,
   minPrice,
   maxPrice,
-  Ascending,
+  ascending,
   query
 }: {
   category?: string
   minPrice?: number
   maxPrice?: number
-  Ascending?: boolean
+  ascending?: boolean
   query?: string
 }): Products[] => {
-  if (!category && !minPrice && !maxPrice && !query) {
+  if (!category && !minPrice && !maxPrice && !query && !ascending) {
     return products
+    .sort((a, b) => {
+      if (ascending) {
+        return a.price - b.price
+      } else {
+        return b.price - a.price
+      }
+    })
   }
   return products
     .filter((product) => {
@@ -57,7 +64,7 @@ export const getProductsFiltered = ({
       return true
     })
     .sort((a, b) => {
-      if (Ascending) {
+      if (ascending) {
         return a.price - b.price
       } else {
         return b.price - a.price

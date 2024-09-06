@@ -1,24 +1,27 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getAllCategories, getProductsFiltered, Products } from '@/data/products';
 import { Input } from './ui/input';
-import { Checkbox } from './ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Button } from './ui/button';
+import { useAtom } from 'jotai';
+import { ascendingAtom, categoryAtom, maxPriceAtom, minPriceAtom, queryAtom } from '@/lib/atoms';
 
 const ProductFilter = ({ onFilter }: { onFilter: (products: Products[]) => void }) => {
 
-  const [category, setCategory] = useState<string | undefined>(undefined);
-  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
-  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
-  const [ascending, setAscending] = useState<boolean>(true);
-  const [query, setQuery] = useState<string | undefined>(undefined);
+  const [category, setCategory] = useAtom(categoryAtom)
+  const [minPrice, setMinPrice] = useAtom(minPriceAtom)
+  const [maxPrice, setMaxPrice] = useAtom(maxPriceAtom)
+  const [ascending, setAscending] = useAtom(ascendingAtom);
+  const [query, setQuery] = useAtom(queryAtom)
+
 
   const handleFilter = () => {
     const filteredProducts = getProductsFiltered({
       category,
       minPrice,
       maxPrice,
-      Ascending: ascending,
+      ascending,
       query,
     });
     onFilter(filteredProducts); // Pass the filtered products back to the parent
@@ -30,61 +33,9 @@ const ProductFilter = ({ onFilter }: { onFilter: (products: Products[]) => void 
 
 
   return (
-    <div className="filter-form p-4 border rounded-lg space-y-4">
-      <h2 className="text-lg font-semibold">Filter Products</h2>
+    <div className="flex flex-col gap-4 items-center p-4 space-y-4">
 
-      <div className="form-group">
-        <label>Category</label>
-        <Select
-          onValueChange={(value) => setCategory(value)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            {
-              getAllCategories().map((category) => (
-                <SelectItem value={category} key={category}>
-                  {category}
-                </SelectItem>
-              ))
-            }
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="minPrice">Minimum Price</label>
-        <Input
-          type="number"
-          id="minPrice"
-          placeholder="Min Price"
-          value={minPrice ?? ''}
-          onChange={(e) => setMinPrice(parseInt(e.target.value, 10))}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="maxPrice">Maximum Price</label>
-        <Input
-          type="number"
-          id="maxPrice"
-          placeholder="Max Price"
-          value={maxPrice ?? ''}
-          onChange={(e) => setMaxPrice(parseInt(e.target.value, 10))}
-        />
-      </div>
-
-      <div className="form-group flex items-center gap-2">
-        <Checkbox
-          checked={ascending}
-          // @ts-expect-error
-          onCheckedChange={setAscending}
-          id="ascending"
-        />
-        <label htmlFor="ascending">Sort by price (Ascending)</label>
-      </div>
-
-      <div className="form-group">
+      <div className="form-group w-full">
         <label htmlFor="query">Search Products</label>
         <Input
           type="text"
@@ -95,6 +46,57 @@ const ProductFilter = ({ onFilter }: { onFilter: (products: Products[]) => void 
         />
       </div>
 
+      <div className='grid max-md:grid-rows-4 lg:grid-cols-4 gap-4 w-full items-end'>
+        <div className="form-group">
+          <label>Category</label>
+          <Select
+            onValueChange={(value) => setCategory(value)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select a Category" />
+            </SelectTrigger>
+            <SelectContent>
+              {
+                getAllCategories().map((category) => (
+                  <SelectItem value={category} key={category}>
+                    {category}
+                  </SelectItem>
+                ))
+              }
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="minPrice">Minimum Price</label>
+          <Input
+            type="number"
+            id="minPrice"
+            placeholder="Min Price"
+            value={minPrice ?? ''}
+            onChange={(e) => setMinPrice(parseInt(e.target.value, 10))}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="maxPrice">Maximum Price</label>
+          <Input
+            type="number"
+            id="maxPrice"
+            placeholder="Max Price"
+            value={maxPrice ?? ''}
+            onChange={(e) => setMaxPrice(parseInt(e.target.value, 10))}
+          />
+        </div>
+
+        <div className="form-group w-full grid grid-cols-2 gap-2">
+          <Button variant={ascending ? "default" : "ghost"} onClick={() => {
+            setAscending(true);
+          }}>Asc</Button>
+          <Button variant={!ascending ? "default" : "ghost"} onClick={() => {
+            setAscending(false);
+          }}>Desc</Button>
+        </div>
+      </div>
     </div>
   );
 };
