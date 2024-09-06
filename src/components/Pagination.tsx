@@ -27,8 +27,8 @@ export default function Pagination() {
 
   return (
     <div className='flex gap-4 items-center justify-between'>
-      <div className='flex items-center gap-2'>
-        <p>Products per page</p>
+      <div className='flex items-center lg:gap-2 gap-1'>
+        <p className="text-sm">Products per page</p>
         <Select defaultValue='5' onValueChange={(v) => setProductsPerPage(parseInt(v))}>
           <SelectTrigger className="w-fit">
             <SelectValue />
@@ -43,11 +43,11 @@ export default function Pagination() {
       </div>
       <div className='flex gap-2 items-center'>
         <Button onClick={handleNextPage} size="icon" variant="ghost" disabled={page===1}>
-          <ArrowLeftIcon className='w-6 h-6' />
+          <ArrowLeftIcon className='w-4 h-4' />
         </Button>
-        <p>Page {page} of {totalPages}</p>
+        <p>{page} of {totalPages}</p>
         <Button onClick={handlePrevPage} size="icon" disabled={page === totalPages} variant="ghost">
-          <ArrowRightIcon className='w-6 h-6' />
+          <ArrowRightIcon className='w-4 h-4' />
         </Button>
       </div>
     </div>
